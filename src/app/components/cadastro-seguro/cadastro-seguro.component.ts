@@ -1,4 +1,8 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { Seguro } from 'src/app/models/Seguro';
+import { MarcaCarro } from 'src/app/models/MarcaCarro';
+import { MarcaCarroService } from 'src/app/services/marca-carro.service';
 
 @Component({
   selector: 'app-cadastro-seguro',
@@ -6,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastro-seguro.component.css']
 })
 export class CadastroSeguroComponent implements OnInit {
+  public seguro = new Seguro();
+  public marcasCarro$: Observable<MarcaCarro[]>;
 
-  constructor() { }
+  constructor(
+    private marcaCarroService: MarcaCarroService
+  ) { }
 
   ngOnInit(): void {
+    this.marcasCarro$ = this.marcaCarroService.getMarcas();
   }
 
 }
